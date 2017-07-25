@@ -27,3 +27,5 @@ hs_err_pid*
 .gradle/
 .idea/
 sp_demo.iml
+out/
+src/main/resources/

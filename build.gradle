@@ -1,9 +1,14 @@
 buildscript {
+    ext {
+        springBootVersion = '1.5.3.RELEASE'
+    }
     repositories {
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
 
@@ -11,8 +16,31 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 
+
+jar {
+    baseName = 'sp_demo'
+    version =  '0.0.1-snapshot'
+}
+
+
+sourceSets {
+    main {
+        resources {
+            srcDirs = ["src/main/resources"]
+        }
+    }
+    test {
+        resources {
+            srcDirs = ['src/test/resources']
+
+        }
+    }
+}
+
 // tag::repositories[]
 repositories {
+    maven { url "http://repo.spring.io/snapshot" }
+    maven { url "http://repo.spring.io/milestone" }
     mavenCentral()
 }
 // end::repositories[]
@@ -24,8 +52,8 @@ targetCompatibility = 1.7
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web:1.5.4.RELEASE")
+    //compile("org.springframework.boot:spring-boot-devtools")
+    compile("org.springframework.data:spring-data-redis:1.8.4.RELEASE")
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile "junit:junit:4.12"
-
-
 }
